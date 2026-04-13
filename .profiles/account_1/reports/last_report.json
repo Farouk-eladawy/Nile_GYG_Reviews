@@ -1,0 +1,11 @@
+{
+  "status": "error",
+  "processed_records_estimate": 0,
+  "errors": [
+    "navigation_error: Page.goto: Target page, context or browser has been closed"
+  ],
+  "elapsed_seconds": 0.014210939407348633,
+  "airtable_table_name": "List",
+  "account_index": 1,
+  "timestamp": "2026-04-13T12:09:09.228994"
+}
