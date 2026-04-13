@@ -1166,6 +1166,10 @@ def scrape_cycle_in_session(browser, context, page, owns_browser, recreate_fresh
             try:
                 if not ensure_reviews_loaded(page, page_num):
                     raise TimeoutError("Reviews failed to load after retries.")
+                
+                # Zoom out to 65% to prevent element overlap and ensure 'Show details' is clickable
+                page.evaluate("document.body.style.zoom = '65%'")
+                human_delay(1, 2)
             except CycleRestartRequested:
                 raise
             except Exception:
