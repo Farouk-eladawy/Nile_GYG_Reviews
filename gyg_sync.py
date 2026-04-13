@@ -1214,10 +1214,11 @@ def scrape_cycle_in_session(browser, context, page, owns_browser, recreate_fresh
                                     booking_ref = line.replace("Booking reference", "").strip().replace(":", "").strip()
                                     break
                         except:
-                            pass
+                            card_text = "Failed to extract text"
 
                     if booking_ref == "N/A":
                         log(f"Could not find Booking Reference for review {index}. Skipping.", "WARNING")
+                        log(f"Raw card text for review {index}: {card_text[:500]}...", "DEBUG")
                         continue
 
                     stars_container_loc = card.locator('.c-user-rating__stars-container')
