@@ -1341,53 +1341,53 @@ def scrape_cycle_in_session(browser, context, page, owns_browser, recreate_fresh
                 except Exception as e:
                     errors.append(f"review_{index}: {e}")
                     log(f"Error processing review {index}: {e}", "ERROR")
+            
+            has_next_page = False
+            
+            try:
+                next_btn = page.locator('nav[role="navigation"] a:has-text("Next")').or_(page.locator('a[aria-label="Next page"]')).or_(page.locator('a:has-text(">")'))
                 
-                has_next_page = False
-                
-                try:
-                    next_btn = page.locator('nav[role="navigation"] a:has-text("Next")').or_(page.locator('a[aria-label="Next page"]')).or_(page.locator('a:has-text(">")'))
-                    
-                    if next_btn.count() > 0 and next_btn.first.is_visible():
+                if next_btn.count() > 0 and next_btn.first.is_visible():
+                    has_next_page = True
+                else:
+                    next_page_link = page.locator(f'nav a[href*="page={page_num + 1}"]')
+                    if next_page_link.count() > 0:
                         has_next_page = True
-                    else:
-                        next_page_link = page.locator(f'nav a[href*="page={page_num + 1}"]')
-                        if next_page_link.count() > 0:
-                            has_next_page = True
-                except:
-                    pass
+            except:
+                pass
+            
+            if len(review_cards) == 0:
+                log("No reviews on this page. Stopping.", "INFO")
+                break
                 
-                if len(review_cards) == 0:
-                    log("No reviews on this page. Stopping.", "INFO")
+            next_page_index = page_num + 1
+            if next_page_index >= MAX_PAGES:
+                log("Reached safety page limit.", "WARNING")
+                break
+            
+            try:
+                disabled_next = page.locator('button[disabled]:has-text("Next")').or_(page.locator('a[aria-disabled="true"]:has-text("Next")'))
+                if disabled_next.count() > 0:
+                    log("Next button is disabled. Reached last page.", "SUCCESS")
                     break
-                    
-                next_page_index = page_num + 1
-                if next_page_index >= MAX_PAGES:
-                    log("Reached safety page limit.", "WARNING")
-                    break
-                
-                try:
-                    disabled_next = page.locator('button[disabled]:has-text("Next")').or_(page.locator('a[aria-disabled="true"]:has-text("Next")'))
-                    if disabled_next.count() > 0:
-                        log("Next button is disabled. Reached last page.", "SUCCESS")
-                        break
-                except:
-                    pass
+            except:
+                pass
 
-                log(f"Navigating to page {next_page_index + 1}...")
-                next_url = build_reviews_url(next_page_index)
-                
-                navigate_with_delay(page, next_url, 3, 6)
+            log(f"Navigating to page {next_page_index + 1}...")
+            next_url = build_reviews_url(next_page_index)
+            
+            navigate_with_delay(page, next_url, 3, 6)
 
-                current_url = page.url.lower()
-                if "login" in current_url or "signin" in current_url or has_login_form(page):
-                    context, page = recover_session_for_page(browser, context, page, owns_browser, is_headless, next_page_index, recreate_fresh_context)
-                    continue
-                
-                expected_next_url = build_reviews_url(next_page_index)
-                current_url = page.url.rstrip("/")
-                if current_url != expected_next_url.rstrip("/"):
-                    log(f"Redirected to unexpected URL ({page.url}) instead of {expected_next_url}. Assuming end of pagination.", "INFO")
-                    break
+            current_url = page.url.lower()
+            if "login" in current_url or "signin" in current_url or has_login_form(page):
+                context, page = recover_session_for_page(browser, context, page, owns_browser, is_headless, next_page_index, recreate_fresh_context)
+                continue
+            
+            expected_next_url = build_reviews_url(next_page_index)
+            current_url = page.url.rstrip("/")
+            if current_url != expected_next_url.rstrip("/"):
+                log(f"Redirected to unexpected URL ({page.url}) instead of {expected_next_url}. Assuming end of pagination.", "INFO")
+                break
         log("Scraping completed.", "SUCCESS")
     except CycleRestartRequested as e:
         pending_restart = e
