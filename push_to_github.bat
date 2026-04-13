@@ -38,6 +38,9 @@ set /p commit_msg="Enter commit message (or press enter for default 'Update from
 if "!commit_msg!"=="" set commit_msg=Update from local environment
 git commit -m "!commit_msg!"
 
+echo Pulling latest changes from GitHub...
+git pull --rebase origin main
+
 echo Pushing to GitHub...
 git push -u origin main
 
