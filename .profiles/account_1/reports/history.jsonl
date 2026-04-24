@@ -292,3 +292,4 @@
 {"status": "success", "processed_records_estimate": 0, "errors": [], "elapsed_seconds": 198.1621539592743, "airtable_table_name": "Nile_Crystal_Booking", "account_index": 1, "timestamp": "2026-04-24T08:03:16.678043"}
 {"status": "success", "processed_records_estimate": 1, "errors": [], "elapsed_seconds": 287.79984164237976, "airtable_table_name": "Nile_Crystal_Booking", "account_index": 1, "timestamp": "2026-04-24T09:15:23.329915"}
 {"status": "success", "processed_records_estimate": 1, "errors": [], "elapsed_seconds": 213.92921948432922, "airtable_table_name": "Nile_Crystal_Booking", "account_index": 1, "timestamp": "2026-04-24T10:25:44.599291"}
+{"status": "success", "processed_records_estimate": 1, "errors": [], "elapsed_seconds": 188.277827501297, "airtable_table_name": "Nile_Crystal_Booking", "account_index": 1, "timestamp": "2026-04-24T10:47:45.824372"}
