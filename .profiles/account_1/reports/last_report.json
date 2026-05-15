@@ -1,11 +1,9 @@
 {
-  "status": "error",
+  "status": "success",
   "processed_records_estimate": 0,
-  "errors": [
-    "Page.goto: Timeout 60000ms exceeded.\nCall log:\n  - navigating to \"https://supplier.getyourguide.com/performance/reviews?page=1\", waiting until \"load\"\n"
-  ],
-  "elapsed_seconds": 160.5303235054016,
+  "errors": [],
+  "elapsed_seconds": 224.55137991905212,
   "airtable_table_name": "Nile_Crystal_Booking",
   "account_index": 1,
-  "timestamp": "2026-05-15T15:49:23.790913"
+  "timestamp": "2026-05-15T16:36:03.342901"
 }
