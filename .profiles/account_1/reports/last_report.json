@@ -2,8 +2,8 @@
   "status": "success",
   "processed_records_estimate": 0,
   "errors": [],
-  "elapsed_seconds": 225.31917762756348,
+  "elapsed_seconds": 223.027019739151,
   "airtable_table_name": "Nile_Crystal_Booking",
   "account_index": 1,
-  "timestamp": "2026-06-16T17:18:33.366976"
+  "timestamp": "2026-06-16T17:23:55.307074"
 }
