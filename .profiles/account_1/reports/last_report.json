@@ -1,9 +1,11 @@
 {
-  "status": "success",
+  "status": "restart",
   "processed_records_estimate": 0,
-  "errors": [],
-  "elapsed_seconds": 210.4775733947754,
+  "errors": [
+    "Failed to recover session for page 1 after 3 attempts."
+  ],
+  "elapsed_seconds": 436.96223163604736,
   "airtable_table_name": "Nile_Crystal_Booking",
   "account_index": 1,
-  "timestamp": "2026-10-02T02:16:27.405923"
+  "timestamp": "2026-10-02T03:11:09.443747"
 }
